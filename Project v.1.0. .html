@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free AI Navigator — лучшие бесплатные ИИ-инструменты</title>
+<meta property="og:title" content="Free AI Navigator">
+<meta property="og:description" content="50+ лучших бесплатных ИИ-инструментов с фильтрами. Без воды, только практика.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5f4f0;--surface:#fff;--surface2:#f0efe9;--surface3:#e8e6df;
+  --border:rgba(0,0,0,0.07);--border-md:rgba(0,0,0,0.12);--border-strong:rgba(0,0,0,0.2);
+  --text:#181816;--muted:#65645e;--faint:#9a9890;
+  --free-bg:#e8f5ee;--free-text:#1a6b40;
+  --fm-bg:#e8effe;--fm-text:#2040a0;
+  --hot-bg:#fdecea;--hot-text:#a0261e;
+  --new-bg:#f0e8ff;--new-text:#5a1a9a;
+  --r:12px;--rs:8px;--rxs:6px;
+}
+body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+.site-header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.25rem;position:sticky;top:0;z-index:100}
+.hi{max-width:1120px;margin:0 auto;height:54px;display:flex;align-items:center;gap:1rem}
+.logo{font-size:14px;font-weight:700;letter-spacing:-0.02em;white-space:nowrap;flex-shrink:0}
+.logo em{font-style:normal;color:var(--muted);font-weight:400}
+.hsearch{flex:1;max-width:360px;position:relative}
+.hsearch input{width:100%;height:32px;border:1px solid var(--border-md);border-radius:var(--rs);padding:0 10px 0 30px;font-size:13px;font-family:inherit;background:var(--surface2);color:var(--text);outline:none;transition:.15s}
+.hsearch input:focus{border-color:var(--border-strong);background:var(--surface)}
+.hsearch input::placeholder{color:var(--faint)}
+.si{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--faint);pointer-events:none;font-size:13px}
+.hlink{font-size:13px;color:var(--muted);text-decoration:none;margin-left:auto;white-space:nowrap}
+.hlink:hover{color:var(--text)}
+
+.hero{max-width:1120px;margin:0 auto;padding:2rem 1.25rem 1.25rem}
+.hero h1{font-size:26px;font-weight:700;letter-spacing:-0.025em;line-height:1.2;margin-bottom:.4rem}
+.hero p{font-size:14px;color:var(--muted);max-width:480px;line-height:1.6}
+.hstats{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
+.hstat{font-size:12px;color:var(--muted)}.hstat strong{color:var(--text);font-weight:600}
+
+.mchips{display:none;gap:6px;overflow-x:auto;padding:.75rem 1.25rem;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.mchips::-webkit-scrollbar{display:none}
+.mchip{padding:5px 12px;border:1px solid var(--border-md);border-radius:20px;font-size:12px;font-weight:500;color:var(--muted);white-space:nowrap;cursor:pointer;background:var(--surface);transition:.12s;flex-shrink:0}
+.mchip.on{background:var(--text);color:#fff;border-color:var(--text)}
+
+.layout{max-width:1120px;margin:0 auto;padding:0 1.25rem 4rem;display:grid;grid-template-columns:210px 1fr;gap:2rem}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.sidebar{display:none}.mchips{display:flex!important}}
+
+.sidebar{position:sticky;top:66px;height:fit-content}
+.fsec{margin-bottom:1.5rem}
+.ftitle{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:.6rem}
+.fopts{display:flex;flex-direction:column;gap:1px}
+.fopt{padding:6px 9px;border-radius:var(--rxs);font-size:13px;color:var(--muted);cursor:pointer;transition:.1s;display:flex;align-items:center;justify-content:space-between;user-select:none}
+.fopt:hover{background:var(--surface);color:var(--text)}
+.fopt.on{background:var(--text);color:#fff}
+.fopt.on .fcnt{color:rgba(255,255,255,.5)}
+.fcnt{font-size:11px;color:var(--faint)}
+
+.rhead{display:flex;align-items:center;margin-bottom:1rem}
+.rcnt{font-size:13px;color:var(--muted)}
+
+.catsec{margin-bottom:2.5rem}
+.catheader{display:flex;align-items:center;gap:10px;margin-bottom:.875rem}
+.caticon{width:34px;height:34px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.cattitle{font-size:15px;font-weight:600}
+.catcnt{font-size:12px;color:var(--faint);margin-top:1px}
+
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:10px}
+
+.tc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:9px;transition:.15s}
+.tc:hover{border-color:var(--border-md);box-shadow:0 1px 4px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.05);transform:translateY(-1px)}
+.ttop{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.tlogo{width:36px;height:36px;border-radius:var(--rxs);background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.tbadges{display:flex;flex-direction:column;gap:3px;align-items:flex-end}
+.badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 6px;border-radius:8px;letter-spacing:.02em}
+.bf{background:var(--free-bg);color:var(--free-text)}
+.bfm{background:var(--fm-bg);color:var(--fm-text)}
+.bh{background:var(--hot-bg);color:var(--hot-text)}
+.bn{background:var(--new-bg);color:var(--new-text)}
+.tname{font-size:14px;font-weight:600}
+.tline{font-size:11px;color:var(--faint);margin-top:1px}
+.tdesc{font-size:12px;color:var(--muted);line-height:1.55;flex:1}
+.ttags{display:flex;flex-wrap:wrap;gap:4px}
+.ttag{font-size:10px;padding:2px 7px;border-radius:var(--rxs);background:var(--surface2);color:var(--muted);font-weight:500}
+.tfoot{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;padding-top:8px;border-top:1px solid var(--border)}
+.tlink{font-size:12px;font-weight:600;color:var(--text);text-decoration:none;flex-shrink:0}
+.tlink:hover{text-decoration:underline;text-underline-offset:2px}
+.ttip{font-size:10px;color:var(--faint);line-height:1.4;text-align:right}
+
+.insight{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-top:10px}
+.ilabel{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+.itext{font-size:12px;color:var(--muted);line-height:1.6}
+
+.empty{text-align:center;padding:4rem 1rem;color:var(--muted)}
+.empty h3{font-size:15px;font-weight:600;color:var(--text);margin-bottom:.4rem}
+
+.sfooter{border-top:1px solid var(--border);padding:1.5rem;text-align:center}
+.sfooter p{font-size:12px;color:var(--faint)}
+.sfooter a{color:var(--muted);text-decoration:none}
+.sfooter a:hover{color:var(--text)}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="hi">
+    <div class="logo">Free AI Navigator <em>· utmnAI</em></div>
+    <div class="hsearch">
+      <span class="si">⌕</span>
+      <input type="text" id="searchInput" placeholder="Найти инструмент...">
+    </div>
+    <a class="hlink" href="https://t.me/utmnAI" target="_blank">→ Telegram</a>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>Лучшие ИИ-инструменты<br>на бесплатной основе</h1>
+  <p>Каталог проверенных сервисов с фильтрами по задаче и уровню. Только то что реально работает — без воды и рекламы.</p>
+  <div class="hstats">
+    <div class="hstat"><strong id="totalCount">52</strong> инструмента</div>
+    <div class="hstat"><strong>8</strong> категорий</div>
+    <div class="hstat"><strong>Всё</strong> бесплатно или freemium</div>
+  </div>
+</div>
+
+<div class="mchips" id="mchips"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar"></aside>
+  <main id="main"></main>
+</div>
+
+<footer class="sfooter">
+  <p>Сделано практиком, не теоретиком · <a href="https://t.me/utmnAI" target="_blank">t.me/utmnAI</a> · Обновляется регулярно</p>
+</footer>
+
+<script>
+const D = {
+  cats:[
+    {id:"text",icon:"✍️",title:"Текст и контент",
+     insight:"Для большинства задач хватает бесплатного Claude или DeepSeek. DeepSeek работает без VPN — хороший старт. Разница между моделями становится заметна на сложных задачах: анализ, длинные тексты, агенты.",
+     tools:[
+      {id:"claude",name:"Claude",line:"Лучший для сложных текстов",logo:"🤖",desc:"Понимает контекст, пишет живо, держит длинный разговор. Лучший для анализа, промтинга, написания и агентных задач.",tags:["тексты","анализ","промпты","агенты"],free:"бесплатно",b:"bf",hot:true,link:"https://claude.ai",tip:"Projects сохраняют контекст между сессиями"},
+      {id:"chatgpt",name:"ChatGPT",line:"Самый популярный",logo:"💬",desc:"Хорош для быстрых задач, идей, черновиков. GPT-4o-mini бесплатно и быстро. Огромная библиотека GPTs.",tags:["тексты","идеи","быстро"],free:"бесплатно",b:"bf",hot:false,link:"https://chatgpt.com",tip:"Бесплатного лимита хватит для старта"},
+      {id:"deepseek",name:"DeepSeek",line:"Мощно и без VPN",logo:"🔷",desc:"Топовая модель из Китая. Работает без VPN, полностью бесплатно. R1 — отличная логика и анализ. Конкурирует с GPT-4.",tags:["тексты","анализ","без vpn"],free:"бесплатно",b:"bf",hot:true,link:"https://chat.deepseek.com",tip:"R1 особенно силён в логике и рассуждениях"},
+      {id:"gemini",name:"Gemini",line:"Google с веб-доступом",logo:"✨",desc:"Бесплатный доступ к интернету в реальном времени. Хорошо интегрирован с Google Docs и Gmail. 1 млн токенов контекста.",tags:["тексты","веб","google","документы"],free:"бесплатно",b:"bf",hot:false,link:"https://gemini.google.com",tip:"Для задач где нужен актуальный веб"},
+      {id:"perplexity",name:"Perplexity",line:"Поиск с источниками",logo:"🔍",desc:"Ищет в интернете и отвечает с источниками. Актуальная информация, нет галлюцинаций про факты. Стандарт для ресёрча.",tags:["поиск","ресёрч","факты","актуально"],free:"бесплатно",b:"bf",hot:true,link:"https://perplexity.ai",tip:"Всегда проверяй источники — они кликабельны"},
+      {id:"notebooklm",name:"NotebookLM",line:"ИИ над твоими документами",logo:"📓",desc:"Загружаешь PDF, статьи, заметки — задаёшь вопросы. Google. Генерирует аудио-подкаст из документов. Полностью бесплатно.",tags:["pdf","ресёрч","подкаст","документы"],free:"бесплатно",b:"bf",hot:true,link:"https://notebooklm.google.com",tip:"Аудио-обзор документа — уникальная killer feature"},
+      {id:"copilot",name:"Microsoft Copilot",line:"GPT-4 бесплатно",logo:"🪟",desc:"GPT-4 Turbo и DALL-E бесплатно через Microsoft. Работает без VPN. Генерирует изображения включено в бесплатный план.",tags:["тексты","картинки","без vpn"],free:"бесплатно",b:"bf",hot:false,link:"https://copilot.microsoft.com",tip:"GPT-4 + DALL-E бесплатно — лучшая халява"},
+      {id:"mistral",name:"Mistral Le Chat",line:"Европейская альтернатива",logo:"🌊",desc:"Быстрая европейская модель без лимитов на бесплатном плане. Хорош для кода и структурированного текста.",tags:["тексты","код","быстро","европа"],free:"бесплатно",b:"bf",hot:false,link:"https://chat.mistral.ai",tip:"Без ограничений по сообщениям в бесплатном плане"},
+    ]},
+    {id:"image",icon:"🖼️",title:"Изображения и визуал",
+     insight:"Krea — для быстрых итераций в реальном времени. Lovart — художественный стиль и качество. Ideogram — единственный кто нормально рендерит текст на картинках. Flux через fal.ai — бесплатно и мощно.",
+     tools:[
+      {id:"krea",name:"Krea",line:"Real-time генерация",logo:"⚡",desc:"Редактирование в реальном времени — двигаешь слайдер и видишь результат мгновенно. Революция в итерациях с визуалом. Бесплатный план.",tags:["картинки","real-time","итерации"],free:"freemium",b:"bfm",hot:true,link:"https://krea.ai",tip:"Real-time editing меняет весь workflow"},
+      {id:"lovart",name:"Lovart",line:"Художественный ИИ",logo:"🎨",desc:"Генерация изображений с уникальным художественным качеством. Силён в портретах, концепт-арте, стилизации. Конкурирует с Midjourney по качеству.",tags:["картинки","арт","стиль","портреты"],free:"freemium",b:"bfm",hot:true,link:"https://lovart.ai",tip:"Описывай стиль и настроение — даёт лучший результат"},
+      {id:"ideogram",name:"Ideogram",line:"Текст на картинках",logo:"🔤",desc:"Единственный инструмент который правильно рендерит текст внутри изображений. Для обложек, баннеров, постов — незаменим. 25 генераций в день.",tags:["картинки","текст","обложки","логотипы"],free:"бесплатно",b:"bf",hot:true,link:"https://ideogram.ai",tip:"25 бесплатных генераций в день"},
+      {id:"flux",name:"Flux (fal.ai)",line:"Лучшая открытая модель",logo:"🌊",desc:"Flux.1 — топовая open-source модель. Доступна бесплатно через fal.ai. Реалистичные результаты, высокое качество. Flux Schnell — быстро.",tags:["картинки","реализм","open-source"],free:"бесплатно",b:"bf",hot:true,link:"https://fal.ai",tip:"Flux Schnell — быстро и бесплатно"},
+      {id:"playground",name:"Playground AI",line:"50 генераций в день",logo:"🛝",desc:"50+ бесплатных генераций в день. Несколько моделей включая Playground v3. Хороший интерфейс, удобен для начинающих.",tags:["картинки","бесплатно","новички"],free:"бесплатно",b:"bf",hot:false,link:"https://playground.com",tip:"50 генераций в день — достаточно для работы"},
+      {id:"firefly",name:"Adobe Firefly",line:"Безопасно для коммерции",logo:"🔥",desc:"Обучен только на лицензионных изображениях — используй коммерчески без рисков. Интегрирован в Photoshop и Illustrator.",tags:["картинки","коммерция","adobe"],free:"freemium",b:"bfm",hot:false,link:"https://firefly.adobe.com",tip:"Единственный вариант для коммерческих проектов без рисков"},
+      {id:"removebg",name:"Remove.bg",line:"Удаление фона",logo:"✂️",desc:"Лучший инструмент для удаления фона. Работает мгновенно, качество отличное. 50 бесплатных изображений в месяц. Есть API.",tags:["фото","фон","редактирование"],free:"freemium",b:"bfm",hot:false,link:"https://remove.bg",tip:"API доступен — можно автоматизировать"},
+      {id:"canva",name:"Canva AI",line:"Дизайн + ИИ",logo:"🎭",desc:"Magic Studio: генерация изображений, удаление фона, расширение картинки, смена стиля — всё внутри Canva. Бесплатный план щедрый.",tags:["дизайн","картинки","шаблоны","фон"],free:"freemium",b:"bfm",hot:false,link:"https://canva.com",tip:"Если уже в Canva — AI фичи уже там"},
+    ]},
+    {id:"video",icon:"🎬",title:"Видео",
+     insight:"Рынок AI-видео меняется каждый месяц. Kling и Hailuo — лучшее соотношение качество/бесплатность прямо сейчас. Veo 2 от Google лучший по физике но в ждлисте.",
+     tools:[
+      {id:"kling",name:"Kling AI",line:"Топ качество бесплатно",logo:"🎬",desc:"Лучшее качество AI-видео на бесплатном плане. 66 кредитов в день. До 10 секунд, реалистичные движения. Обязательно попробуй.",tags:["видео","генерация","качество"],free:"бесплатно",b:"bf",hot:true,link:"https://klingai.com",tip:"66 кредитов в день = 3-4 видео бесплатно"},
+      {id:"hailuo",name:"Hailuo AI",line:"Быстро и реалистично",logo:"🌊",desc:"Быстрая генерация видео от MiniMax. Силён в сценах с людьми и реалистичными движениями. Бесплатные кредиты при регистрации.",tags:["видео","реализм","люди"],free:"бесплатно",b:"bf",hot:true,link:"https://hailuoai.video",tip:"Лучший для видео с людьми и живыми сценами"},
+      {id:"luma",name:"Luma Dream Machine",line:"Кинематографичность",logo:"🌙",desc:"Кинематографичные движения камеры, высокое качество. 30 бесплатных генераций в месяц. Лучший для красивого визуала.",tags:["видео","кино","камера"],free:"freemium",b:"bfm",hot:false,link:"https://lumalabs.ai/dream-machine",tip:"Лучший для красивых движений камеры"},
+      {id:"veo",name:"Veo 2 (VideoFX)",line:"Google DeepMind",logo:"🔵",desc:"Veo 2 от Google — лучшая физика и движения в AI-видео. Доступен через Google Labs VideoFX. Ждлист, регистрация открыта.",tags:["видео","google","физика","качество"],free:"бесплатно",b:"bf",hot:true,link:"https://labs.google/fx/tools/video-fx",tip:"Физика движений лучше конкурентов"},
+      {id:"pika",name:"Pika",line:"Анимация изображений",logo:"⚡",desc:"Простой старт в AI-видео. Можно анимировать свои изображения. Бесплатный план с ежедневными кредитами. Хорош для коротких клипов.",tags:["видео","анимация","просто"],free:"freemium",b:"bfm",hot:false,link:"https://pika.art",tip:"Лучший для анимации существующих фото"},
+      {id:"runway",name:"Runway Gen-3",line:"Профессиональный инструмент",logo:"🚀",desc:"Самый мощный инструмент для AI-видео. Gen-3 Alpha — топ качество. 125 бесплатных кредитов при регистрации, потом платно.",tags:["видео","профи","мощный"],free:"freemium",b:"bfm",hot:false,link:"https://runwayml.com",tip:"125 кредитов при регистрации — попробуй бесплатно"},
+    ]},
+    {id:"audio",icon:"🎵",title:"Аудио и голос",
+     insight:"Suno и Udio перевернули создание музыки — полная песня за 30 секунд. ElevenLabs — стандарт для голоса. Whisper через Groq — лучшая транскрипция бесплатно и быстро.",
+     tools:[
+      {id:"suno",name:"Suno",line:"Полная песня за 30 секунд",logo:"🎵",desc:"Генерирует песни с вокалом и инструментами по описанию. 50 кредитов в день бесплатно = 10 полных песен. Результат шокирует.",tags:["музыка","песни","вокал"],free:"бесплатно",b:"bf",hot:true,link:"https://suno.com",tip:"50 кредитов = 10 полных песен в день"},
+      {id:"udio",name:"Udio",line:"Высокое музыкальное качество",logo:"🎹",desc:"Альтернатива Suno с иногда лучшим качеством звука. 1200 кредитов в месяц бесплатно. Больше контроля над стилем.",tags:["музыка","качество","стиль"],free:"бесплатно",b:"bf",hot:false,link:"https://udio.com",tip:"1200 кредитов в месяц — очень щедро"},
+      {id:"elevenlabs",name:"ElevenLabs",line:"Лучший синтез голоса",logo:"🗣️",desc:"Стандарт для синтеза голоса. Клонирование по 1 минуте аудио, 29 языков, эмоции. 10 минут бесплатно в месяц.",tags:["голос","озвучка","клонирование"],free:"freemium",b:"bfm",hot:true,link:"https://elevenlabs.io",tip:"10 минут бесплатно — попробуй клонирование голоса"},
+      {id:"whisper",name:"Whisper (Groq)",line:"Лучшая транскрипция",logo:"📝",desc:"Whisper от OpenAI через Groq — мгновенная и бесплатная транскрипция. Поддерживает русский. Точность на уровне человека.",tags:["транскрипция","речь","текст"],free:"бесплатно",b:"bf",hot:false,link:"https://console.groq.com",tip:"Через Groq быстрее и дешевле чем через OpenAI"},
+      {id:"podcastle",name:"Podcastle",line:"ИИ для подкастов",logo:"🎙️",desc:"Запись, транскрипция, улучшение качества и монтаж подкастов. Magic Dust убирает шум мгновенно. Бесплатный план есть.",tags:["подкаст","запись","шум"],free:"freemium",b:"bfm",hot:false,link:"https://podcastle.ai",tip:"Magic Dust убирает шум лучше ручного монтажа"},
+    ]},
+    {id:"code",icon:"💻",title:"Код и разработка",
+     insight:"Cursor изменил как разработчики пишут код. V0 делает frontend-компоненты из текста. Для тех кто не умеет программировать — Bolt или Replit Agent создадут приложение полностью.",
+     tools:[
+      {id:"cursor",name:"Cursor",line:"IDE с ИИ внутри",logo:"◻️",desc:"Редактор кода с встроенным Claude и GPT-4. Понимает весь проект, объясняет, рефакторит, дебажит. 2000 completions бесплатно.",tags:["код","ide","разработка"],free:"freemium",b:"bfm",hot:true,link:"https://cursor.com",tip:"2 недели Pro бесплатно при регистрации"},
+      {id:"v0",name:"v0 (Vercel)",line:"Frontend из текста",logo:"▲",desc:"Описываешь компонент — получаешь React/Tailwind код. Итерируешь в диалоге. От Vercel. Лимиты на бесплатном плане.",tags:["frontend","react","ui"],free:"freemium",b:"bfm",hot:true,link:"https://v0.dev",tip:"Опиши стиль конкретно — результат лучше"},
+      {id:"bolt",name:"Bolt.new",line:"Приложение из промпта",logo:"⚡",desc:"Создаёт веб-приложения в браузере. Пишет код, устанавливает зависимости, деплоит. От StackBlitz. Для MVP и прототипов.",tags:["приложения","fullstack","деплой"],free:"freemium",b:"bfm",hot:true,link:"https://bolt.new",tip:"Для MVP быстрее чем писать самому"},
+      {id:"replit",name:"Replit Agent",line:"Код без знания кода",logo:"🔄",desc:"Описываешь — Replit Agent пишет и деплоит. Для людей без опыта программирования. Хостинг включён. Лучший старт для новичков.",tags:["приложения","новички","деплой"],free:"freemium",b:"bfm",hot:false,link:"https://replit.com",tip:"Лучший старт для тех кто не программировал"},
+      {id:"copilot-gh",name:"GitHub Copilot",line:"ИИ в редакторе",logo:"🐙",desc:"Автодополнение кода в VS Code и других редакторах. Бесплатный план 2000 completions в месяц теперь для всех.",tags:["код","vscode","автодополнение"],free:"бесплатно",b:"bf",hot:false,link:"https://github.com/features/copilot",tip:"Бесплатный план появился — обнови если старый аккаунт"},
+      {id:"windsurf",name:"Windsurf (Codeium)",line:"Бесплатная альтернатива Cursor",logo:"🏄",desc:"Мощный AI-редактор от Codeium. Cascade — агентный режим который сам пишет и тестирует. Щедрее Cursor на бесплатном плане.",tags:["код","ide","агент"],free:"freemium",b:"bfm",hot:true,link:"https://codeium.com/windsurf",tip:"Cascade пишет целые фичи самостоятельно"},
+    ]},
+    {id:"automation",icon:"⚡",title:"Автоматизация",
+     insight:"Make — лучший старт без кода. n8n — полный контроль и AI-агенты. Не переусложняй: начни с одного сценария. Автоматизируй то что делаешь вручную каждый день.",
+     tools:[
+      {id:"make",name:"Make",line:"Визуальная автоматизация",logo:"🔧",desc:"Лучший визуальный редактор сценариев. 1000 операций в месяц бесплатно. Огромная библиотека коннекторов. Бывший Integromat.",tags:["автоматизация","no-code","сценарии"],free:"бесплатно",b:"bf",hot:false,link:"https://make.com",tip:"1000 операций в месяц для старта хватит"},
+      {id:"n8n",name:"n8n",line:"Open-source мощь",logo:"🔀",desc:"Open-source автоматизация с полным контролем. Деплой локально = бесплатно без лимитов. Нативные AI-агенты и любые API.",tags:["автоматизация","open-source","агенты","api"],free:"бесплатно",b:"bf",hot:true,link:"https://n8n.io",tip:"Self-hosted = бесплатно и без каких-либо лимитов"},
+      {id:"activepieces",name:"Activepieces",line:"Open-source с AI-шагами",logo:"🧩",desc:"Современная open-source альтернатива Zapier с нативными AI-шагами. Claude, GPT в любом сценарии. Полностью бесплатно self-hosted.",tags:["автоматизация","open-source","ai"],free:"бесплатно",b:"bf",hot:true,link:"https://activepieces.com",tip:"AI-шаги нативно — не нужно настраивать отдельно"},
+      {id:"zapier",name:"Zapier",line:"Самый популярный",logo:"⚡",desc:"Стандарт автоматизации. 100 задач в месяц бесплатно. 6000+ приложений. Если уже используешь — незачем менять.",tags:["автоматизация","популярный","6000 апп"],free:"бесплатно",b:"bf",hot:false,link:"https://zapier.com",tip:"100 задач = одна простая автоматизация бесплатно"},
+      {id:"notion-ai",name:"Notion AI",line:"ИИ в базе знаний",logo:"📔",desc:"AI-функции в Notion: суммаризация, написание, Q&A по базе данных. Если уже в Notion — очевидный апгрейд.",tags:["notion","документы","база знаний"],free:"freemium",b:"bfm",hot:false,link:"https://notion.so/product/ai",tip:"Q&A по своей базе знаний — главная фича"},
+    ]},
+    {id:"design",icon:"🎨",title:"Дизайн и презентации",
+     insight:"Gamma закрывает 80% задач с презентациями за 2 минуты. Napkin — лучший для быстрой инфографики из текста. Для логотипов и брендинга — Looka дёшево и быстро.",
+     tools:[
+      {id:"gamma",name:"Gamma",line:"Презентация из промпта",logo:"γ",desc:"Вводишь тему — получаешь готовую презентацию с дизайном. Экспорт в PPT. Для питчей и отчётов. Бесплатные кредиты.",tags:["презентации","слайды","питч"],free:"freemium",b:"bfm",hot:true,link:"https://gamma.app",tip:"10 бесплатных карточек — хватит для большинства задач"},
+      {id:"napkin",name:"Napkin AI",line:"Инфографика из текста",logo:"📐",desc:"Вставляешь текст — получаешь инфографику, схемы, диаграммы. Для объяснения сложных концептов. Бесплатный план есть.",tags:["инфографика","схемы","визуализация"],free:"freemium",b:"bfm",hot:true,link:"https://napkin.ai",tip:"Лучший для быстрой визуализации идей"},
+      {id:"tome",name:"Tome",line:"Интерактивные презентации",logo:"📖",desc:"ИИ создаёт интерактивные презентации с анимациями. Современнее PowerPoint. Хорош для продающих материалов.",tags:["презентации","интерактив","анимации"],free:"freemium",b:"bfm",hot:false,link:"https://tome.app",tip:"Интерактивность без кода — уникальная фича"},
+      {id:"looka",name:"Looka",line:"Логотип и брендинг",logo:"🔷",desc:"ИИ создаёт логотип и брендбук по описанию. Предпросмотр бесплатно. Для идей и направления — бесплатно отлично.",tags:["логотип","брендинг","идентика"],free:"freemium",b:"bfm",hot:false,link:"https://looka.com",tip:"Бесплатный предпросмотр для выбора направления"},
+      {id:"photoroom",name:"Photoroom",line:"Фото для продуктов",logo:"📸",desc:"Удаление фона, замена фона, продуктовые фото с AI. Стандарт для e-commerce фотографии. Бесплатно с водяным знаком.",tags:["фото","товары","e-commerce","фон"],free:"freemium",b:"bfm",hot:false,link:"https://photoroom.com",tip:"Для фото товаров — быстрее профессионала"},
+      {id:"uizard",name:"Uizard",line:"UI из скетча",logo:"📱",desc:"Загружаешь скетч — Uizard делает интерактивный прототип. Или описываешь словами. Для быстрых MVP и прототипов мобильных.",tags:["ui","прототип","мобайл","скетч"],free:"freemium",b:"bfm",hot:false,link:"https://uizard.io",tip:"Скетч → прототип за минуты"},
+    ]},
+    {id:"productivity",icon:"🚀",title:"Продуктивность",
+     insight:"Otter.ai и Fireflies обязательны если проводишь много встреч. ChatPDF закрывает работу с документами без платного Claude. tl;dv — для команд.",
+     tools:[
+      {id:"otter",name:"Otter.ai",line:"Транскрипция встреч",logo:"🦦",desc:"Запись, транскрипция и саммари встреч в реальном времени. Zoom, Meet, Teams. 300 минут в месяц бесплатно.",tags:["встречи","транскрипция","зум"],free:"бесплатно",b:"bf",hot:false,link:"https://otter.ai",tip:"300 минут = около 5 часов встреч бесплатно"},
+      {id:"fireflies",name:"Fireflies.ai",line:"ИИ-нотатор встреч",logo:"🔥",desc:"Записывает встречи, делает саммари, выделяет action items. Ищет по всем прошлым встречам. Бесплатный план щедрый.",tags:["встречи","саммари","задачи"],free:"бесплатно",b:"bf",hot:false,link:"https://fireflies.ai",tip:"Action items автоматом — не нужно вести записи"},
+      {id:"chatpdf",name:"ChatPDF",line:"Вопросы к PDF",logo:"📄",desc:"Загружаешь PDF — задаёшь вопросы. 3 PDF и 50 вопросов в день бесплатно. Для студентов и работы с документами.",tags:["pdf","документы","вопросы"],free:"бесплатно",b:"bf",hot:false,link:"https://chatpdf.com",tip:"3 PDF в день бесплатно — для большинства хватит"},
+      {id:"tldv",name:"tl;dv",line:"Клипы из встреч",logo:"🎯",desc:"Записывает встречи и нарезает клипы с метками. Для команд — делишься конкретным моментом. Бесплатный план щедрый.",tags:["встречи","клипы","команда"],free:"бесплатно",b:"bf",hot:false,link:"https://tldv.io",tip:"Клипы из встреч — killer feature для команд"},
+      {id:"mem",name:"Mem",line:"Умные заметки",logo:"🧠",desc:"Заметки которые сами организуются и связываются. ИИ помнит контекст и подсказывает нужное. Альтернатива Notion для личного.",tags:["заметки","pkm","память"],free:"freemium",b:"bfm",hot:false,link:"https://mem.ai",tip:"Автосвязи между заметками — ручная организация не нужна"},
+    ]},
+  ]
+};
+
+let cat="all", lev="all", q="";
+
+function total(){return D.cats.reduce((s,c)=>s+c.tools.length,0)}
+
+function matches(t){
+  if(lev==="free"&&t.b!=="bf")return false;
+  if(lev==="freemium"&&t.b!=="bfm")return false;
+  if(lev==="hot"&&!t.hot)return false;
+  if(q){const ql=q.toLowerCase();return t.name.toLowerCase().includes(ql)||t.line.toLowerCase().includes(ql)||t.desc.toLowerCase().includes(ql)||t.tags.some(x=>x.includes(ql));}
+  return true;
+}
+
+function card(t){
+  return `<div class="tc">
+    <div class="ttop">
+      <div class="tlogo">${t.logo}</div>
+      <div class="tbadges">
+        <span class="badge ${t.b}">${t.b==="bf"?"бесплатно":"freemium"}</span>
+        ${t.hot?'<span class="badge bh">горячее</span>':''}
+      </div>
+    </div>
+    <div><div class="tname">${t.name}</div><div class="tline">${t.line}</div></div>
+    <div class="tdesc">${t.desc}</div>
+    <div class="ttags">${t.tags.map(x=>`<span class="ttag">${x}</span>`).join('')}</div>
+    <div class="tfoot">
+      <a class="tlink" href="${t.link}" target="_blank">Открыть →</a>
+      <div class="ttip">${t.tip}</div>
+    </div>
+  </div>`;
+}
+
+function render(){
+  const clist=cat==="all"?D.cats:D.cats.filter(c=>c.id===cat);
+  let html="",total_v=0;
+  for(const c of clist){
+    const ts=c.tools.filter(matches);
+    if(!ts.length)continue;
+    total_v+=ts.length;
+    html+=`<div class="catsec">
+      <div class="catheader"><div class="caticon">${c.icon}</div><div><div class="cattitle">${c.title}</div><div class="catcnt">${ts.length} инструментов</div></div></div>
+      <div class="tgrid">${ts.map(card).join('')}</div>
+      ${!q?`<div class="insight"><div class="ilabel">Совет практика</div><div class="itext">${c.insight}</div></div>`:''}
+    </div>`;
+  }
+  if(!total_v)html=`<div class="empty"><h3>Ничего не найдено</h3><p>Попробуй изменить фильтры или запрос</p></div>`;
+  document.getElementById('main').innerHTML=`<div class="rhead"><div class="rcnt">${total_v} инструментов</div></div>${html}`;
+}
+
+function buildNav(){
+  const cats=[{id:"all",label:"Все",icon:""}, ...D.cats.map(c=>({id:c.id,label:c.title,icon:c.icon}))];
+  const levels=[{id:"all",label:"Все"},{id:"free",label:"Только бесплатные"},{id:"freemium",label:"Freemium"},{id:"hot",label:"Горячее"}];
+  document.getElementById('sidebar').innerHTML=`
+    <div class="fsec"><div class="ftitle">Категория</div><div class="fopts">${cats.map(c=>`<div class="fopt${cat===c.id?' on':''}" onclick="setC('${c.id}')">${c.icon?c.icon+' ':''}${c.label}<span class="fcnt">${c.id==='all'?total():D.cats.find(x=>x.id===c.id)?.tools.length||''}</span></div>`).join('')}</div></div>
+    <div class="fsec"><div class="ftitle">Тип</div><div class="fopts">${levels.map(l=>`<div class="fopt${lev===l.id?' on':''}" onclick="setL('${l.id}')">${l.label}</div>`).join('')}</div></div>`;
+  document.getElementById('mchips').innerHTML=cats.map(c=>`<div class="mchip${cat===c.id?' on':''}" onclick="setC('${c.id}')">${c.icon} ${c.label}</div>`).join('');
+  document.getElementById('totalCount').textContent=total();
+}
+
+function setC(id){cat=id;buildNav();render()}
+function setL(id){lev=id;buildNav();render()}
+document.getElementById('searchInput').addEventListener('input',e=>{q=e.target.value.trim();render()});
+
+buildNav();render();
+</script>
+</body>
+</html>
