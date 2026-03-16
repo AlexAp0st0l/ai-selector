@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Какой ИИ тебе нужен прямо сейчас?</title>
+<meta property="og:title" content="Какой ИИ тебе нужен прямо сейчас?">
+<meta property="og:description" content="3 вопроса — и конкретный инструмент под твою задачу. Без списков на 100 пунктов.">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --surface2: #f0efe9;
+    --border: rgba(0,0,0,0.08);
+    --border-strong: rgba(0,0,0,0.16);
+    --text: #1a1a18;
+    --text-muted: #6b6b65;
+    --text-faint: #9e9d97;
+    --accent: #1a1a18;
+    --accent-light: #f0efe9;
+    --info-bg: #eef3ff;
+    --info-text: #2d52b8;
+    --success-bg: #edfaf3;
+    --success-text: #186b41;
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 520px;
+  }
+
+  .header {
+    margin-bottom: 2.5rem;
+  }
+
+  .header-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 1rem;
+  }
+
+  .header h1 {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .header p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 1.75rem;
+  }
+
+  .progress {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 2rem;
+  }
+
+  .progress-dot {
+    height: 2px;
+    flex: 1;
+    border-radius: 2px;
+    background: var(--border-strong);
+    transition: background 0.3s;
+  }
+
+  .progress-dot.active { background: var(--text); }
+  .progress-dot.done { background: var(--text-muted); }
+
+  .step-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 0.75rem;
+  }
+
+  .question {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--surface);
+    text-align: left;
+    width: 100%;
+  }
+
+  .option:hover {
+    border-color: var(--border-strong);
+    background: var(--surface2);
+    transform: translateY(-1px);
+  }
+
+  .option:active { transform: translateY(0); }
+
+  .option-icon {
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .option-body { flex: 1; }
+
+  .option-text {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .option-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+
+  .back-btn {
+    background: none;
+    border: none;
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: inherit;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .back-btn:hover { color: var(--text); }
+
+  .result-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 1.25rem;
+  }
+
+  .tool-primary {
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    margin-bottom: 10px;
+  }
+
+  .tool-secondary {
+    padding: 14px 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    margin-bottom: 10px;
+  }
+
+  .tool-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: var(--text);
+    color: #fff;
+    margin-bottom: 10px;
+    letter-spacing: 0.03em;
+  }
+
+  .tool-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 5px;
+  }
+
+  .tool-meta {
+    font-size: 12px;
+    color: var(--text-faint);
+    margin-bottom: 8px;
+  }
+
+  .tool-why {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+
+  .tool-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--info-text);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .tool-link:hover { text-decoration: underline; }
+
+  .insight {
+    padding: 14px 16px;
+    border-radius: var(--radius-sm);
+    background: var(--surface2);
+    border-left: 3px solid var(--border-strong);
+    margin-top: 14px;
+    margin-bottom: 1.5rem;
+  }
+
+  .insight-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 6px;
+  }
+
+  .insight-text {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .restart-btn {
+    background: none;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .restart-btn:hover { background: var(--surface2); color: var(--text); }
+
+  .footer {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 12px;
+    color: var(--text-faint);
+  }
+
+  .footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .footer a:hover { color: var(--text); }
+
+  .result-anim {
+    animation: fadeUp 0.25s ease;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 540px) {
+    body { padding: 1.25rem 1rem 3rem; }
+    .header h1 { font-size: 22px; }
+    .card { padding: 1.25rem; }
+    .question { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="header-tag">Практический инструмент</div>
+    <h1>Какой ИИ тебе нужен прямо сейчас?</h1>
+    <p>3 вопроса — и конкретный инструмент под твою задачу. Без списков на 100 пунктов.</p>
+  </div>
+
+  <div class="card" id="app"></div>
+
+  <div class="footer">
+    Сделано с практикой, а не теорией ·
+    <a href="https://t.me/utmnAI" target="_blank">Telegram-канал</a>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    step: "Шаг 1 из 3",
+    q: "Что ты хочешь сделать прямо сейчас?",
+    options: [
+      { icon: "✍️", text: "Написать текст", sub: "пост, письмо, описание, скрипт", val: "text" },
+      { icon: "🖼️", text: "Создать визуал", sub: "обложка, картинка, инфографика", val: "visual" },
+      { icon: "⚡", text: "Автоматизировать задачу", sub: "убрать рутину, связать инструменты", val: "auto" },
+      { icon: "🔍", text: "Найти или исследовать", sub: "актуальная инфо, анализ, сравнение", val: "research" },
+      { icon: "💡", text: "Разобраться в теме", sub: "объяснение, структуризация мыслей", val: "learn" }
+    ]
+  },
+  {
+    step: "Шаг 2 из 3",
+    q: "Сколько времени есть на задачу?",
+    options: [
+      { icon: "⚡", text: "Нужно быстро", sub: "5–15 минут, без долгого погружения", val: "fast" },
+      { icon: "🎯", text: "Готов потратить время", sub: "30+ минут, хочу хороший результат", val: "deep" }
+    ]
+  },
+  {
+    step: "Шаг 3 из 3",
+    q: "Ты уже пробовал ИИ для этого?",
+    options: [
+      { icon: "👋", text: "Нет, первый раз", sub: "", val: "new" },
+      { icon: "😐", text: "Пробовал — результат не устроил", sub: "получал бред или слишком общее", val: "bad" },
+      { icon: "✅", text: "Да, хочу что-то лучше или новее", sub: "", val: "exp" }
+    ]
+  }
+];
+
+const results = {
+  text: {
+    fast: {
+      new: { primary: { name: "Claude", meta: "бесплатно · claude.ai", why: "Лучший старт для текстов. Понимает контекст, пишет живо. Скажи что нужно — и зачем.", link: "https://claude.ai" }, secondary: null, insight: "Главное — не просить «напиши пост». Скажи: кому, зачем, в каком тоне. Чем точнее запрос, тем живее текст." },
+      bad: { primary: { name: "Claude", meta: "бесплатно · claude.ai", why: "Скорее всего проблема была в промпте. Claude даёт другой результат если добавить роль, контекст и тон.", link: "https://claude.ai" }, secondary: null, insight: "Добавь к запросу: «Пиши как [кто]. Для [кого]. Тон: [какой]. Без [чего]» — результат изменится кардинально." },
+      exp: { primary: { name: "Claude", meta: "бесплатно · claude.ai", why: "Для опытных — используй системный промпт и задавай роль. Результат сильно отличается от базового ChatGPT.", link: "https://claude.ai" }, secondary: { name: "ChatGPT", meta: "бесплатно · chatgpt.com", why: "Для коротких задач и быстрых итераций — удобный интерфейс с историей.", link: "https://chatgpt.com" }, insight: "Попробуй начать с «Ты — [специалист]. Твоя задача — [конкретно]. Пиши для [аудитория].»" }
+    },
+    deep: {
+      new: { primary: { name: "Claude", meta: "бесплатно · claude.ai", why: "Для глубокой работы с текстом — лучший выбор. Держит контекст длинного разговора и итерирует.", link: "https://claude.ai" }, secondary: null, insight: "Начни с простого запроса, потом уточняй. «Сделай короче», «добавь пример», «перепиши в другом тоне» — так текст становится твоим." },
+      bad: { primary: { name: "Claude", meta: "бесплатно · claude.ai", why: "Проблема «общих» ответов решается через контекст. Расскажи про проект, аудиторию, что уже пробовал.", link: "https://claude.ai" }, secondary: null, insight: "Перед задачей дай справку: «Вот проект. Вот кто читает. Вот что пробовал — не понравилось потому что…»" },
+      exp: { primary: { name: "Claude Projects", meta: "платно · claude.ai", why: "Projects сохраняют контекст между сессиями — не нужно объяснять заново каждый раз.", link: "https://claude.ai" }, secondary: { name: "Notion AI", meta: "платно · notion.so", why: "Если работаешь с документами и базами — Notion AI встроен прямо в рабочее пространство.", link: "https://notion.so" }, insight: "Создай Claude Project с описанием своего проекта и аудитории. Это меняет качество всех текстов сразу." }
+    }
+  },
+  visual: {
+    fast: {
+      new: { primary: { name: "Krea", meta: "бесплатно · krea.ai", why: "Редактирование в реальном времени прямо в браузере. Видишь результат сразу — без рендера.", link: "https://krea.ai" }, secondary: null, insight: "Не описывай результат — описывай стиль. «Минималистичный, тёмный фон, белые элементы» работает лучше чем «красивая картинка»." },
+      bad: { primary: { name: "Ideogram", meta: "бесплатно · ideogram.ai", why: "Лучший для текста на изображениях и чётких стилей. Если другие давали кашу — попробуй здесь.", link: "https://ideogram.ai" }, secondary: { name: "Krea", meta: "бесплатно · krea.ai", why: "Real-time редактор — удобно итерировать быстро.", link: "https://krea.ai" }, insight: "Для обложек: добавь «flat design, clean, minimal» — меньше шума, больше читаемости." },
+      exp: { primary: { name: "Krea", meta: "бесплатно · krea.ai", why: "Новый real-time editing меняет workflow — правишь прямо в процессе, без экспорта-импорта.", link: "https://krea.ai" }, secondary: { name: "Logart", meta: "платно · logart.ai", why: "Для стилизованных образов и портретов — отдельный уровень качества.", link: "https://logart.ai" }, insight: "Krea + конкретный стиль референса = результат за 10 минут без дизайнера." }
+    },
+    deep: {
+      new: { primary: { name: "Ideogram", meta: "бесплатно · ideogram.ai", why: "Интуитивный интерфейс, бесплатный старт. Хорошо для обложек, постов, логотипов.", link: "https://ideogram.ai" }, secondary: null, insight: "Начни: опиши что на картинке + стиль + цвет. Три элемента — уже хороший промпт." },
+      bad: { primary: { name: "Logart", meta: "платно · logart.ai", why: "Если другие не давали нужное качество — стиль Logart другой. Особенно для реалистичных образов.", link: "https://logart.ai" }, secondary: { name: "Krea", meta: "бесплатно · krea.ai", why: "Real-time итерации — быстро найдёшь что работает.", link: "https://krea.ai" }, insight: "Качество визуала на 70% зависит от промпта. Добавь: стиль, технику, освещение, настроение." },
+      exp: { primary: { name: "Logart", meta: "платно · logart.ai", why: "Для профессионального результата с полным контролем стиля.", link: "https://logart.ai" }, secondary: { name: "Krea", meta: "бесплатно · krea.ai", why: "Для быстрых итераций и real-time правок.", link: "https://krea.ai" }, insight: "Связка Logart (финальное качество) + Krea (итерации) — закрывает большинство визуальных задач без дизайнера." }
+    }
+  },
+  auto: {
+    fast: {
+      new: { primary: { name: "Zapier", meta: "бесплатно · zapier.com", why: "Самый простой старт в автоматизации. Соединяй сервисы без кода, добавь ИИ-шаг через ChatGPT.", link: "https://zapier.com" }, secondary: null, insight: "Первая автоматизация: триггер (что-то происходит) → действие (что делается). Начни с одного простого сценария." },
+      bad: { primary: { name: "Make", meta: "бесплатно · make.com", why: "Более гибкий чем Zapier, визуальный редактор. Если Zapier был неудобен — Make зайдёт лучше.", link: "https://make.com" }, secondary: null, insight: "Опиши задачу: «Когда [событие] → сделай [действие] → отправь [куда]». Конкретный сценарий проще собрать." },
+      exp: { primary: { name: "n8n", meta: "бесплатно · n8n.io", why: "Для сложных сценариев с полным контролем. Open-source, можно деплоить локально.", link: "https://n8n.io" }, secondary: { name: "Make", meta: "бесплатно · make.com", why: "Если нужна скорость — Make с готовыми шаблонами быстрее.", link: "https://make.com" }, insight: "n8n + Claude API = мощная связка для агентных сценариев без ограничений платформ." }
+    },
+    deep: {
+      new: { primary: { name: "Make", meta: "бесплатно · make.com", why: "Визуальный редактор сценариев. Бесплатный тариф покрывает большинство базовых задач.", link: "https://make.com" }, secondary: null, insight: "Автоматизируй то что делаешь вручную каждый день. Одна автоматизация = часы в месяц." },
+      bad: { primary: { name: "n8n", meta: "бесплатно · n8n.io", why: "Если Make/Zapier не давали нужного результата — n8n даёт полный контроль над логикой.", link: "https://n8n.io" }, secondary: null, insight: "Большинство автоматизаций ломаются из-за нечёткого сценария. Опиши шаги как инструкцию для человека." },
+      exp: { primary: { name: "n8n + Claude API", meta: "бесплатно · n8n.io", why: "Самая гибкая связка для ИИ-агентов. Полный контроль, без ограничений платформ.", link: "https://n8n.io" }, secondary: null, insight: "Claude API в n8n позволяет строить агентов которые принимают решения внутри сценария." }
+    }
+  },
+  research: {
+    fast: {
+      new: { primary: { name: "Perplexity", meta: "бесплатно · perplexity.ai", why: "Google, но умный. Отвечает с источниками, актуальная информация, коротко и по делу.", link: "https://perplexity.ai" }, secondary: null, insight: "Задавай вопросы как человеку. «Что лучше для X» вместо «X сравнение 2024»." },
+      bad: { primary: { name: "Perplexity", meta: "бесплатно · perplexity.ai", why: "Если ChatGPT давал устаревшее или придуманное — Perplexity работает с реальным вебом.", link: "https://perplexity.ai" }, secondary: null, insight: "Для проверки фактов смотри источники которые Perplexity приводит — не доверяй ответу без них." },
+      exp: { primary: { name: "Perplexity Pro", meta: "платно · perplexity.ai", why: "Pro-режим даёт Deep Research — многоступенчатый анализ темы.", link: "https://perplexity.ai" }, secondary: { name: "Claude", meta: "бесплатно · claude.ai", why: "Для анализа документов и синтеза большого объёма информации.", link: "https://claude.ai" }, insight: "Perplexity (актуальные данные) → Claude (анализ и структуризация) = глубокий ресёрч без часов работы." }
+    },
+    deep: {
+      new: { primary: { name: "Perplexity", meta: "бесплатно · perplexity.ai", why: "Стартовая точка для любого исследования. Даёт обзор темы с источниками за минуты.", link: "https://perplexity.ai" }, secondary: { name: "Claude", meta: "бесплатно · claude.ai", why: "Для анализа найденного и структуризации выводов.", link: "https://claude.ai" }, insight: "Сначала Perplexity для обзора, потом Claude для «что это значит для моей задачи»." },
+      bad: { primary: { name: "Claude", meta: "бесплатно · claude.ai", why: "Если нужен не поиск а анализ — Claude лучше обрабатывает большой объём текста.", link: "https://claude.ai" }, secondary: null, insight: "Загрузи документы в Claude и попроси: «Найди противоречия», «Что здесь главное», «Сравни позиции»." },
+      exp: { primary: { name: "Claude Projects", meta: "платно · claude.ai", why: "Projects + загрузка документов = персональный аналитик с памятью о проекте.", link: "https://claude.ai" }, secondary: { name: "Perplexity", meta: "бесплатно · perplexity.ai", why: "Для актуальных данных которых нет в документах.", link: "https://perplexity.ai" }, insight: "Claude Projects помнит контекст проекта между сессиями. Не нужно объяснять заново." }
+    }
+  },
+  learn: {
+    fast: {
+      new: { primary: { name: "Claude", meta: "бесплатно · claude.ai", why: "Объясняет сложное простым языком. Можно переспрашивать, уточнять, просить примеры.", link: "https://claude.ai" }, secondary: null, insight: "Скажи: «Объясни как для человека без технического бэкграунда» или «через аналогию из [сферы]» — результат другой." },
+      bad: { primary: { name: "Claude", meta: "бесплатно · claude.ai", why: "Если другие давали слишком сложно — попробуй с указанием уровня: «Я [профессия], объясни без жаргона».", link: "https://claude.ai" }, secondary: null, insight: "«Сделай проще», «дай пример из практики», «где используется реально» — три вопроса которые превращают теорию в понимание." },
+      exp: { primary: { name: "Claude", meta: "бесплатно · claude.ai", why: "Для глубокого разбора — задавай уточняющие вопросы в диалоге. Claude держит контекст разговора.", link: "https://claude.ai" }, secondary: { name: "Perplexity", meta: "бесплатно · perplexity.ai", why: "Если нужны актуальные источники и свежие данные по теме.", link: "https://perplexity.ai" }, insight: "Метод Фейнмана с Claude: попроси объяснить → объясни своими словами → попроси найти где ошибся." }
+    },
+    deep: {
+      new: { primary: { name: "Claude", meta: "бесплатно · claude.ai", why: "Лучший собеседник для глубокого понимания. Можно строить целые обучающие сессии в диалоге.", link: "https://claude.ai" }, secondary: null, insight: "Не читай — разговаривай. Задавай вопросы, проверяй своё понимание, проси контрпримеры." },
+      bad: { primary: { name: "Claude", meta: "бесплатно · claude.ai", why: "Создай системный промпт: «Ты тьютор по [теме]. Моя цель: [цель]. Уровень: [уровень]. Учи шаг за шагом.»", link: "https://claude.ai" }, secondary: null, insight: "Проблема «общих» объяснений решается контекстом твоего уровня и цели. Скажи зачем это нужно." },
+      exp: { primary: { name: "Claude Projects", meta: "платно · claude.ai", why: "Projects для обучения — сохраняет прогресс, помнит что разобрали, продолжает с нужного места.", link: "https://claude.ai" }, secondary: null, insight: "Настрой Claude Project как персонального тьютора: тема, уровень, цель, стиль объяснений. Лучше любого курса." }
+    }
+  }
+};
+
+let answers = [];
+let step = 0;
+
+function choose(val) {
+  answers[step] = val;
+  step++;
+  render();
+}
+
+function goBack() {
+  step--;
+  answers.pop();
+  render();
+}
+
+function restart() {
+  answers = [];
+  step = 0;
+  render();
+}
+
+function render() {
+  const app = document.getElementById('app');
+  if (step < 3) {
+    const q = questions[step];
+    app.innerHTML = `
+      <div class="progress">
+        ${[0,1,2].map(i => `<div class="progress-dot ${i < step ? 'done' : i === step ? 'active' : ''}"></div>`).join('')}
+      </div>
+      ${step > 0 ? `<button class="back-btn" onclick="goBack()">← назад</button>` : ''}
+      <div class="step-label">${q.step}</div>
+      <div class="question">${q.q}</div>
+      <div class="options">
+        ${q.options.map(o => `
+          <button class="option" onclick="choose('${o.val}')">
+            <span class="option-icon">${o.icon}</span>
+            <div class="option-body">
+              <div class="option-text">${o.text}</div>
+              ${o.sub ? `<div class="option-sub">${o.sub}</div>` : ''}
+            </div>
+          </button>`).join('')}
+      </div>`;
+  } else {
+    const [task, time, exp] = answers;
+    const r = results[task]?.[time]?.[exp];
+    if (!r) { restart(); return; }
+    app.innerHTML = `
+      <div class="progress">
+        ${[0,1,2].map(() => `<div class="progress-dot done"></div>`).join('')}
+      </div>
+      <div class="result-label result-anim">Твой инструмент</div>
+      <div class="tool-primary result-anim">
+        <div class="tool-badge">начни здесь</div>
+        <div class="tool-name">${r.primary.name}</div>
+        <div class="tool-meta">${r.primary.meta}</div>
+        <div class="tool-why">${r.primary.why}</div>
+        <a class="tool-link" href="${r.primary.link}" target="_blank">Открыть →</a>
+      </div>
+      ${r.secondary ? `
+      <div class="tool-secondary result-anim">
+        <div class="tool-name">${r.secondary.name}</div>
+        <div class="tool-meta">${r.secondary.meta}</div>
+        <div class="tool-why">${r.secondary.why}</div>
+        <a class="tool-link" href="${r.secondary.link}" target="_blank">Открыть →</a>
+      </div>` : ''}
+      <div class="insight result-anim">
+        <div class="insight-label">Совет практика</div>
+        <div class="insight-text">${r.insight}</div>
+      </div>
+      <button class="restart-btn" onclick="restart()">Пройти заново →</button>
+    `;
+  }
+}
+
+render();
+</script>
+</body>
+</html>
